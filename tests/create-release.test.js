@@ -1,11 +1,15 @@
-jest.mock('@actions/core');
+jest.mock('fs', () => ({
+  promises: {
+    access: jest.fn()
+  }
+}));
 jest.mock('@actions/github');
 jest.mock('fs');
 
 const core = require('@actions/core');
 const { GitHub, context } = require('@actions/github');
 const fs = require('fs');
-const run = require('../src/create-release.js');
+const run = require('../src/create-release');
 
 /* eslint-disable no-undef */
 describe('Create Release', () => {
